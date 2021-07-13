@@ -1,0 +1,381 @@
+﻿@model ERPSchoolManagement.Models.Custom.CustomSchool
+@{
+    ViewData["Title"] = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-header row">
+    <div class="content-header-left col-md-6 col-12 mb-2">
+        <h3 class="content-header-title">Book Appointment</h3>
+        <div class="row breadcrumbs-top">
+            <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index","Default")">Home</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index","School",new{area="Management"})">School</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Add School
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="content-header-right col-md-6 col-12">
+        <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+            <button class="btn btn-info round dropdown-toggle dropdown-menu-right box-shadow-2 px-2 mb-1" id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ft-settings icon-left"></i> Settings</button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1"><a class="dropdown-item" href="card-bootstrap.html">Cards</a><a class="dropdown-item" href="component-buttons-extended.html">Buttons</a></div>
+        </div>
+    </div>
+</div>
+<div class="content-body">
+    <!-- Add School -->
+    <section id="add-school">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Add New School</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" id="School_Form" name="School_Form">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>School Name: <span class="text-danger" style="font-size:25px;font-weight:bold;">*</span></label>
+                                @Html.EditorFor(model => model.SchoolName, new { htmlAttributes = new { @class = "form-control rounded-right", @placeholder = "Enter School Name" } })
+                                @Html.ValidationMessageFor(model => model.SchoolName, "", new { @class = "text-danger", id = "err1" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Principal Name: <span class="text-danger" style="font-size:25px;font-weight:bold;">*</span></label>
+                                @Html.EditorFor(model => model.PrincipalName, new { htmlAttributes = new { @class = "form-control rounded-right", @placeholder = "Enter Principal Name" } })
+                                @Html.ValidationMessageFor(model => model.PrincipalName, "", new { @class = "text-danger", id = "err2" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Telephone No.</label>
+                            @Html.EditorFor(model => model.PhoneNo, new { htmlAttributes = new { @class = "form-control rounded-right", @placeholder = "Enter School Telephone No.", maxlength = "20", minlength = "10", @onkeypress = "return onlyNumberKey(event)" } })
+                            @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger", id = "err3" })
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Mobile No.</label>
+                            @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control rounded-right", @placeholder = "Enter School Mobile No.", maxlength = "10", minlength = "10", @onkeypress = "return onlyNumberKey(event)" } })
+                            @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger", id = "err4" })
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Email:</label>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control rounded-right", @placeholder = "Enter School Email" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", id = "err5" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Address: <span class="text-danger" style="font-size:25px;font-weight:bold;">*</span></label>
+                                @Html.EditorFor(model => model.SchoolAddress, new { htmlAttributes = new { @class = "form-control rounded-right", @placeholder = "Enter School Address" } })
+                                @Html.ValidationMessageFor(model => model.SchoolAddress, "", new { @class = "text-danger", id = "err6" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>State</label> <span class="text-danger" style="font-size:25px;font-weight:bold;">*</span>
+                            @Html.DropDownList("StateId", (IEnumerable<SelectListItem>)ViewData["State"], "Please Select State", new { @class = "form-control rounded-right" })
+                            @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger", id = "err7" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>City</label> <span class="text-danger" style="font-size:25px;font-weight:bold;">*</span>
+                            @Html.DropDownList("CityId", (IEnumerable<SelectListItem>)ViewData["City"], "Please Select City", new { @class = "form-control rounded-right" })
+                            @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger", id = "err8" })
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Locality</label> <span class="text-danger" style="font-size:25px;font-weight:bold;">*</span>
+                            @Html.DropDownList("LocalityId", (IEnumerable<SelectListItem>)ViewData["Locality"], "Please Select Locality", new { @class = "form-control rounded-right" })
+                            @Html.ValidationMessageFor(model => model.LocalityId, "", new { @class = "text-danger", id = "err9" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Pincode</label> <span class="text-danger" style="font-size:25px;font-weight:bold;">*</span>
+                        @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control rounded-right", @placeholder = "Enter Pincode" } })
+
+                        @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger", id = "err10" })
+                    </div>
+
+                    <div class="card-footer ml-auto">
+                        <button type="submit" class="btn btn-outline-success mr-1" id="submitAddSchool">Submit</button>
+                        <button type="submit" class="btn btn-outline-danger" id="cancelAddSchool">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+    var cityUrl = '@Url.Action("GetCities","School",new { area = "Management" })';
+    var cities = $('#CityId');
+    var localityUrl = '@Url.Action("GetLocalities", "School", new { area = "Management" })';
+    var localities = $('#LocalityId');
+    $('#StateId').change(
+        function () {
+
+            cities.empty();
+
+            $.getJSON
+                (
+                    cityUrl,
+                    { ID: $(this).val() },
+                    function (data) {
+                        if (!data) {
+                            return;
+                        }
+                        cities.append($('<option></option>').val('').text('Please Select City'));
+                        $.each(data, function (index, item) {
+                            cities.append($('<option></option>').val(item.Id).text(item.CityName));
+                        });
+                    });
+        }
+    )
+
+        $(cities).change(
+            function () {
+
+                localities.empty();
+
+                $.getJSON
+                    (
+                        localityUrl,
+                        { ID: $(this).val() },
+                        function (data) {
+                            if (!data) {
+                                return;
+                            }
+                            localities.append($('<option></option>').val('').text('Please Select Locality'));
+                            $.each(data, function (index, item) {
+                                localities.append($('<option></option>').val(item.Id).text(item.LocalArea));
+                            });
+                        });
+            }
+        )
+    </script>
+
+    <script>
+        function onlyNumberKey(evt) {
+
+            var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+            if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+                return false;
+            return true;
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#submitAddSchool').click(function () {
+                if (SchoolValidation()) {
+                    GetSchool();
+                }
+            });
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        function SchoolValidation() {
+            var isvalid = true;
+            var name = $('#SchoolName').val();
+            var principal = $('#PrincipalName').val();
+            var contact = $('#PhoneNo').val();
+            var mobile = $('#MobileNo').val();
+            var email = $('#Email').val();
+            var address = $('#SchoolAddress').val();
+            var state = $('#StateId').val();
+            var city = $('#CityId').val();
+            var locality = $('#LocalityId').val();
+            var pincode = $('#Pincode').val();
+
+            //namecheck
+            if (name == "") {
+                document.getElementById('err1').innerHTML = "Please fill the Schoolname field!";
+                return false;
+            }
+
+            if ((name.length < 5) || (name.length > 100)) {
+                document.getElementById('err1').innerHTML = "Length of the Schoolname would be greater than 5 and less than 100";
+                return false;
+            }
+            if (!isNaN(name)) {
+                document.getElementById('err1').innerHTML = "Only characters are allowed";
+                return false;
+            }
+            if (principal == "") {
+                document.getElementById('err2').innerHTML = "Please fill the Principal field!";
+                return false;
+            }
+
+            if ((principal.length < 3) || (principal.length > 100)) {
+                document.getElementById('err2').innerHTML = "Length of the Principal would be greater than 3 and less than 100";
+                return false;
+            }
+            if (!isNaN(principal)) {
+                document.getElementById('err2').innerHTML = "Only characters are allowed";
+                return false;
+            }
+
+
+
+            //if (contact == "") {
+            //    document.getElementById('err3').innerHTML = "Please fill the Telephone field!";
+            //    return false;
+            //}
+
+            if (isNaN(contact)) {
+                document.getElementById('err3').innerHTML = "Only numbers are allowed";
+                return false;
+            }
+
+            if (contact.length != 10) {
+                document.getElementById('err3').innerHTML = "Contact must contain 10 digits";
+                return false;
+            }
+
+            //if (mobile == "") {
+            //    document.getElementById('err4').innerHTML = "Please fill the Mobile field!";
+            //    return false;
+            //}
+
+            if (isNaN(mobile)) {
+                document.getElementById('err4').innerHTML = "Only numbers are allowed";
+                return false;
+            }
+
+            if (mobile.length != 10) {
+                document.getElementById('err4').innerHTML = "Contact must contain 10 digits";
+                return false;
+            }
+
+            //email check
+            if (email == "") {
+                document.getElementById('err5').innerHTML = "Please fill the Email field!";
+                return false;
+            }
+
+            @*if (email.indexOf('+ @ + ') <= 0) {
+                document.getElementById('err5').innerHTML = "Position of '@' is not valid";
+                return false;
+            }*@
+
+            if ((email.charAt(email.length - 4) != '.') && (email.charAt(email.length - 3) != '.')) {
+                document.getElementById('err5').innerHTML = "Postion of '.' is invalid";
+                return false;
+            }
+
+            if (address == "") {
+                document.getElementById('err6').innerHTML = "Please fill the address field!";
+                return false;
+            }
+
+            if (state <=0) {
+                document.getElementById('err7').innerHTML = "Please fill the state field!";
+                return false;
+            }
+            if (city <=0) {
+                document.getElementById('err8').innerHTML = "Please fill the city field!";
+                return false;
+            }
+            if (locality <=0) {
+                document.getElementById('err9').innerHTML = "Please fill the locality field!";
+                return false;
+            }
+
+
+            if (pincode == "") {
+                document.getElementById('err10').innerHTML = "Please fill the Pincode Field";
+                return false;
+            }
+            return true;
+        }
+
+    </script>
+
+
+    <script type="text/javascript">
+        function validateSchoolform() {
+            var isvalid = true;
+
+            var name = $('#SchoolName').val();
+            var principal = $('#PrincipalName').val();
+            var contact = $('#PhoneNo').val();
+            var mobile = $('#MobileNo').val();
+            var email = $('#Email').val();
+            var address = $('#SchoolAddress').val();
+            var state = $('#StateId').val();
+            var city = $('#CityId').val();
+            var locality = $('#LocalityId').val();
+            var pincode = $('#Pincode').val();
+
+            if (name == null || name == "" || principal == null || principal == "" || address == null || address == "") {
+                alert('some fields are empty');
+                isvalid = false;
+            }
+            return isvalid;
+
+        }
+
+    </script>
+
+
+    <script type="text/javascript">
+
+        function GetSchool() {
+            if (validateSchoolform()) {
+                var result = $("#School_Form").serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Management/School/AddSchool',
+                    //data: '{email: ' + JSON.stringify($('#EmailId').val()) + '}',
+                    dataType: "json",
+
+                    data: $("#School_Form").serialize(),
+
+                    success: function (res) {
+                        if (res) {
+                            alert("School is Added.");
+                            window.location.href = "/Management/School/Index";
+                        }
+                    },
+                    error: function (res) {
+                        if (!res.IsRegistered) {
+                            //;
+                            console.log(xhr.responseText);
+                            alert(res.Message);
+                            alert("Please try after sometime");
+                        }
+                        else {
+                            alert("Please try after sometime");
+                            alert(res.Message);
+                        }
+                    },
+                });
+            }
+        }
+    </script>
+
+}
